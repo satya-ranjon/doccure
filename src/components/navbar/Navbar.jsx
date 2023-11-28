@@ -23,7 +23,7 @@ import logo from "../../assets/logo (1).png";
 import useAuthentication from "../../hooks/useAuthentication";
 const pages = [
   { link: "/", label: "Home" },
-  { link: "/service", label: "Service" },
+  { link: "/all-test", label: "Tests" },
   { link: "/blog", label: "Blog" },
   { link: "/contact", label: "Contact" },
 ];
