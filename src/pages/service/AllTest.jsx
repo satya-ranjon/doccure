@@ -9,31 +9,22 @@ import SortIcon from "@mui/icons-material/Sort";
 import useAllTest from "../../hooks/useAllTest";
 import TestCardSkeleton from "../../components/skeleton/TestCardSkeleton";
 import TestCard from "./TestCard";
+import dayjs from "dayjs";
 
-const days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
 const AllTest = () => {
-  const [filterDate, setFilterDate] = useState();
-  let selectedDay = new Date(filterDate).getDay();
+  const [filterDate, setFilterDate] = useState(null);
+  let selectedDay = filterDate ? new Date(filterDate) : new Date();
 
   const { data, loading } = useAllTest();
 
-  const tests = data.filter((item) => {
-    const dates = item.availableDate;
-    return dates.includes(days[selectedDay]);
-  });
+  const tests = data.filter(
+    (item) => item.availableDate === selectedDay?.toISOString()
+  );
 
   let showData = filterDate ? tests : data;
 
   const handleDelete = () => {
-    setFilterDate();
+    setFilterDate(null);
   };
   return (
     <div className=" pb-28">
@@ -43,7 +34,7 @@ const AllTest = () => {
           <SortIcon /> <span>Filter</span>
           {filterDate && (
             <Chip
-              label={days[selectedDay]}
+              label={dayjs(selectedDay).format("DD-MM-YYYY")}
               variant="outlined"
               onDelete={handleDelete}
             />
@@ -54,6 +45,7 @@ const AllTest = () => {
             <DatePicker
               label="Filter By Date"
               selectedSections="day"
+              value={filterDate}
               onChange={(value) => setFilterDate(value)}
             />
           </DemoContainer>
