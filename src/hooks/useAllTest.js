@@ -7,6 +7,11 @@ const useAllTest = () => {
   const [error, setError] = useState(false);
   const axios = useAxiosPublic();
 
+  const removeDataById = (id) => {
+    const filterData = data.filter((item) => item._id !== id);
+    setData(filterData);
+  };
+
   useEffect(() => {
     setLoading(true);
     setError(false);
@@ -24,7 +29,7 @@ const useAllTest = () => {
       });
   }, []);
 
-  return { loading, data, error };
+  return { loading, data, error, removeDataById };
 };
 
 export default useAllTest;
