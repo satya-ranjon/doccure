@@ -1,50 +1,23 @@
 import { useEffect, useState } from "react";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import ListItemText from "@mui/material/ListItemText";
-import Select from "@mui/material/Select";
-import Checkbox from "@mui/material/Checkbox";
 import { Autocomplete, Button, Chip, TextField } from "@mui/material";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { SingleInputTimeRangeField } from "@mui/x-date-pickers-pro/SingleInputTimeRangeField";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-    },
-  },
-};
-
-const days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+import { DatePicker } from "@mui/x-date-pickers";
 
 const initialState = {
   img: "",
   price: "",
+  slots: "",
   title: "",
   description: "",
 };
 
 const CreateTest = () => {
   const [state, setState] = useState(initialState);
-  const [availableDate, setAvailableDate] = useState([]);
-  const [timeSlot, setTimeSlot] = useState(() => []);
+  const [availableDate, setAvailableDate] = useState();
   const [includedTests, setIncludedTest] = useState([]);
   const [error, setError] = useState("");
   const axios = useAxiosSecure();
@@ -58,7 +31,6 @@ const CreateTest = () => {
     const data = {
       ...state,
       availableDate,
-      timeSlot,
       includedTests,
     };
     if (!data.title) {
@@ -77,12 +49,8 @@ const CreateTest = () => {
       setError("Included Tests is required!");
       return;
     }
-    if (!data.availableDate.length > 0) {
+    if (!data.availableDate) {
       setError("Available Date is required!");
-      return;
-    }
-    if (!data.timeSlot.length > 0) {
-      setError("Time Slot is required!");
       return;
     }
     if (!data.description) {
@@ -103,8 +71,7 @@ const CreateTest = () => {
             timer: 1500,
           });
           setState(initialState);
-          setAvailableDate([]);
-          setTimeSlot([]);
+          setAvailableDate();
           setIncludedTest([]);
         })
         .catch((err) => console.log(err));
@@ -146,11 +113,22 @@ const CreateTest = () => {
             variant="outlined"
           />
           <TextField
+            value={state.slots}
+            onChange={handleChange}
+            name="slots"
+            id="outlined-basic"
+            label="Slots"
+            type="number"
+            variant="outlined"
+          />
+
+          <TextField
             value={state.price}
             onChange={handleChange}
             name="price"
             id="outlined-basic"
             label="Price"
+            type="number"
             variant="outlined"
           />
 
@@ -180,45 +158,15 @@ const CreateTest = () => {
               />
             )}
           />
-          {/* =========== Available Date ============ */}
-          <FormControl sx={{ width: "100%" }}>
-            <InputLabel id="demo-multiple-checkbox-label">
-              Available Date
-            </InputLabel>
-            <Select
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
-              multiple
-              value={availableDate}
-              onChange={(event) => {
-                const value = event.target.value;
-                setAvailableDate(
-                  typeof value === "string" ? value.split(",") : value
-                );
-              }}
-              input={<OutlinedInput label="Available Date" />}
-              renderValue={(selected) => selected.join(", ")}
-              MenuProps={MenuProps}>
-              {days.map((day) => (
-                <MenuItem key={day} value={day}>
-                  <Checkbox checked={availableDate.indexOf(day) > -1} />
-                  <ListItemText primary={day} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-
-          {/* =========== Time Slot ============ */}
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer
-              components={[
-                "SingleInputTimeRangeField",
-                "SingleInputTimeRangeField",
-              ]}>
-              <SingleInputTimeRangeField
-                label="Time Slot"
-                value={timeSlot}
-                onChange={(newValue) => setTimeSlot(newValue)}
+          {/* =========== Available Date 1 ============ */}
+          <LocalizationProvider
+            sx={{ width: "100%" }}
+            dateAdapter={AdapterDayjs}>
+            <DemoContainer sx={{ width: "100%" }} components={["DatePicker"]}>
+              <DatePicker
+                sx={{ width: "100%" }}
+                label="Available Date"
+                onChange={(value) => setAvailableDate(value)}
               />
             </DemoContainer>
           </LocalizationProvider>
