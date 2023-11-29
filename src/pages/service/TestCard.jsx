@@ -1,15 +1,6 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Chip } from "@mui/material";
+import dayjs from "dayjs";
 import { Link } from "react-router-dom";
-
-const days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
 
 const TestCard = ({ item }) => {
   return (
@@ -17,17 +8,18 @@ const TestCard = ({ item }) => {
       <img src={item?.img} alt="" className=" h-48 w-full" />
       <Box py={1} p={2}>
         <h1 className="text-xl font-bold">{item?.title}</h1>
-        <div className="flex flex-wrap gap-2">
-          <h1 className=" text-sm font-semibold">Available day:</h1>
-          <Box>
-            {item?.availableDate.map((item) => (
-              <span
-                className="py-1 px-1 text-xs bg-sky-600 text-white"
-                key={item}>
-                {item.slice(0, 3)}
-              </span>
-            ))}
-          </Box>
+        <div className=" flex justify-between items-center mt-2">
+          <div className="flex flex-wrap gap-2">
+            <h1 className=" text-lg font-semibold">Date : </h1>
+            <Chip
+              label={dayjs(item?.availableDate).format("DD-MM-YYYY")}
+              color="primary"
+            />
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <h1 className=" text-lg font-semibold">Slots : </h1>
+            <Chip label={item?.slots} color="primary" />
+          </div>
         </div>
         <div className="flex mt-4 justify-between items-start gap-2">
           <Button size="small" variant="outlined" disableTouchRipple>
