@@ -24,6 +24,8 @@ import { Avatar, Menu, MenuItem, Tooltip } from "@mui/material";
 import useAuthentication from "../hooks/useAuthentication";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import DatasetIcon from "@mui/icons-material/Dataset";
+import AddCardIcon from "@mui/icons-material/AddCard";
+import AlignHorizontalLeftIcon from "@mui/icons-material/AlignHorizontalLeft";
 
 const drawerWidth = 240;
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -78,6 +80,12 @@ const navLink = [
     link: "/dashboard/hero-section",
   },
   { icon: <PeopleAltIcon />, label: "Users", link: "/dashboard/users" },
+  {
+    icon: <AlignHorizontalLeftIcon />,
+    label: "ALL Test",
+    link: "/dashboard/all-test",
+  },
+  { icon: <AddCardIcon />, label: "Add Test", link: "/dashboard/add-test" },
 ];
 
 const settings = [
