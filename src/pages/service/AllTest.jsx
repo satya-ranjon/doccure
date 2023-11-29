@@ -1,4 +1,4 @@
-import { Box, Button, Chip, Container } from "@mui/material";
+import { Box, Chip, Container } from "@mui/material";
 import PageHeader from "../../components/common/PageHeader";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -27,7 +27,7 @@ const AllTest = () => {
 
   const tests = data.filter((item) => {
     const dates = item.availableDate;
-    return dates.includes(selectedDay);
+    return dates.includes(days[selectedDay]);
   });
 
   let showData = filterDate ? tests : data;

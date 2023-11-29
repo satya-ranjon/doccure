@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
-import useTestDetails from "../../hooks/useTestDetails";
+import useTestById from "../../hooks/useTestById";
 import PageHeader from "../../components/common/PageHeader";
 import {
   Box,
   Button,
+  Chip,
   CircularProgress,
   Container,
   Divider,
@@ -15,12 +16,16 @@ import {
 import { Fragment } from "react";
 import useAllTest from "../../hooks/useAllTest";
 import TestCard from "./TestCard";
+import TestCardSkeleton from "../../components/skeleton/TestCardSkeleton";
+import dayjs from "dayjs";
+import timeFormat from "../../utils/timeFormat";
 
 const TestDetails = () => {
   const { id } = useParams();
-  const { data, loading } = useTestDetails(id);
+  const { data, loading } = useTestById(id);
   const { data: allTest, loading: allTestLoading } = useAllTest();
 
+  console.log(data?.timeSlot);
   return (
     <div>
       <PageHeader>Test Details</PageHeader>
@@ -38,9 +43,26 @@ const TestDetails = () => {
       <Box mt={5}>
         <Container>
           {!loading && (
-            <div className="flex justify-between items-start gap-3">
+            <div className="flex flex-col md:flex-row justify-between items-start gap-3">
               <div className="w-full">
                 <img src={data?.img} alt="" className=" w-full h-[500px]" />
+
+                <h1 className=" mt-5 text-2xl font-bold">Available Day</h1>
+                <div className=" flex justify-start items-start gap-2 flex-wrap">
+                  {data?.availableDate.map((item, index) => (
+                    <Chip
+                      key={index}
+                      color="primary"
+                      label={item}
+                      variant="outlined"
+                    />
+                  ))}
+                </div>
+                <h1 className=" mt-5 text-2xl font-bold">Time Slot</h1>
+                <h1>
+                  {data?.timeSlot && timeFormat(data?.timeSlot[0])} To{" "}
+                  {data?.timeSlot && timeFormat(data?.timeSlot[1])}
+                </h1>
               </div>
               <div className="w-full">
                 <h1 className="text-4xl font-bold">{data?.title}</h1>
@@ -141,6 +163,15 @@ const TestDetails = () => {
 
           <Box mt={5} mb={5}>
             <h1 className=" text-3xl font-bold  my-2">Popular Packages:</h1>
+
+            {allTestLoading && (
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
+                <TestCardSkeleton />
+                <TestCardSkeleton />
+                <TestCardSkeleton />
+              </div>
+            )}
+
             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
               {!allTestLoading &&
                 allTest

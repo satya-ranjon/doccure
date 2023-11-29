@@ -24,7 +24,7 @@ const TestCard = ({ item }) => {
               <span
                 className="py-1 px-1 text-xs bg-sky-600 text-white"
                 key={item}>
-                {days[item].slice(0, 3)}
+                {item.slice(0, 3)}
               </span>
             ))}
           </Box>
