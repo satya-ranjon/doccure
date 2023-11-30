@@ -16,6 +16,7 @@ import { useParams } from "react-router-dom";
 import useTestById from "../../../hooks/useTestById";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
+import DashboardContainer from "../../../components/common/DashboardContainer";
 
 const initialState = {
   img: "",
@@ -116,21 +117,20 @@ const UpdateTest = () => {
     }
   }, [error]);
   return (
-    <div>
-      <h1 className=" text-2xl font-bold mt-8">UPDATE TEST</h1>
-      {loading && (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            height: "600px",
-            alignItems: "center",
-          }}>
-          <CircularProgress size={180} />
-        </Box>
-      )}
-      {!loading && availableDate && (
-        <div className="w-full">
+    <>
+      <DashboardContainer label="UPDATE TEST">
+        {loading && (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              height: "600px",
+              alignItems: "center",
+            }}>
+            <CircularProgress size={180} />
+          </Box>
+        )}
+        {!loading && availableDate && (
           <form
             onSubmit={handleSubmit}
             className="w-full flex flex-col gap-8 mt-5">
@@ -223,9 +223,9 @@ const UpdateTest = () => {
               Update Test
             </Button>
           </form>
-        </div>
-      )}
-    </div>
+        )}
+      </DashboardContainer>
+    </>
   );
 };
 
