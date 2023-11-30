@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
-import useAxiosPublic from "./useAxiosPublic";
+import useAxiosSecure from "./useAxiosSecure";
 
-const useTestDetails = (id) => {
+const useAllBanner = () => {
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [error, setError] = useState(false);
-  const axios = useAxiosPublic();
+  const axios = useAxiosSecure();
+
+  const removeDataById = (id) => {
+    const filterData = data.filter((item) => item._id !== id);
+    setData(filterData);
+  };
 
   useEffect(() => {
     setLoading(true);
     setError(false);
     axios
-      .get(`/tests/${id}`)
+      .get("/banner")
       .then((res) => {
         setData(res.data);
         setLoading(false);
@@ -22,9 +27,9 @@ const useTestDetails = (id) => {
         setLoading(false);
         setError(true);
       });
-  }, [id]);
+  }, []);
 
-  return { loading, data, error };
+  return { loading, data, error, removeDataById };
 };
 
-export default useTestDetails;
+export default useAllBanner;
