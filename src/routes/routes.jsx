@@ -23,6 +23,7 @@ import Reservation from "../pages/dashboard/reservation/Reservation";
 import NotFound from "../pages/notfound/NotFound";
 import AdminRoutes from "./AdminRoutes";
 import PrivateRoute from "./PrivateRoutes";
+import Contact from "../pages/contact/Contact";
 
 const router = createBrowserRouter([
   {
@@ -51,8 +52,8 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/service",
-        element: <Services />,
+        path: "/contact",
+        element: <Contact />,
       },
     ],
   },

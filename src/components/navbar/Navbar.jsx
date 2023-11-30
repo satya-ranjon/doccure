@@ -25,6 +25,7 @@ import useAuthentication from "../../hooks/useAuthentication";
 const pages = [
   { link: "/", label: "Home" },
   { link: "/all-test", label: "Tests" },
+  { link: "/contact", label: "Contact" },
 ];
 const settings = [
   { link: "/dashboard/profile", label: "Dashboard" },
