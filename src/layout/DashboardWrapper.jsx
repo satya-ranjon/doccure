@@ -16,16 +16,19 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { images } from "../constant";
-import { Avatar, Menu, MenuItem, Tooltip } from "@mui/material";
+import { Avatar, Menu, MenuItem, Skeleton, Tooltip } from "@mui/material";
 import useAuthentication from "../hooks/useAuthentication";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import DatasetIcon from "@mui/icons-material/Dataset";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import AlignHorizontalLeftIcon from "@mui/icons-material/AlignHorizontalLeft";
+import DvrIcon from "@mui/icons-material/Dvr";
+import AirlineSeatReclineExtraIcon from "@mui/icons-material/AirlineSeatReclineExtra";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import BusinessIcon from "@mui/icons-material/Business";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const drawerWidth = 240;
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -75,27 +78,79 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 const navLink = [
   {
-    icon: <DatasetIcon />,
-    label: "Hero Section",
-    link: "/dashboard/hero-section",
+    icon: <AccountCircleIcon />,
+    label: "Profile",
+    link: "/dashboard/profile",
+    role: "user",
   },
-  { icon: <PeopleAltIcon />, label: "Users", link: "/dashboard/users" },
+  {
+    icon: <AccountCircleIcon />,
+    label: "Profile",
+    link: "/dashboard/profile",
+    role: "admin",
+  },
+  {
+    icon: <AirlineSeatReclineExtraIcon />,
+    label: "Test Results",
+    link: "/dashboard/test-result",
+    role: "user",
+  },
+  {
+    icon: <BusinessIcon />,
+    label: "Appointments",
+    link: "/dashboard/my-appointments",
+    role: "user",
+  },
+  {
+    icon: <BusinessIcon />,
+    label: "Reservation",
+    link: "/dashboard/reservation",
+    role: "admin",
+  },
+  {
+    icon: <DvrIcon />,
+    label: "Banners",
+    link: "/dashboard/banners",
+    role: "admin",
+  },
+
+  {
+    icon: <DatasetIcon />,
+    label: "Add Banner",
+    link: "/dashboard/add-banner",
+    role: "admin",
+  },
+  {
+    icon: <PeopleAltIcon />,
+    label: "Users",
+    link: "/dashboard/users",
+    role: "admin",
+  },
   {
     icon: <AlignHorizontalLeftIcon />,
     label: "ALL Test",
     link: "/dashboard/all-test",
+    role: "admin",
   },
-  { icon: <AddCardIcon />, label: "Add Test", link: "/dashboard/add-test" },
+  {
+    icon: <AddCardIcon />,
+    label: "Add Test",
+    link: "/dashboard/add-test",
+    role: "admin",
+  },
 ];
 
 const settings = [
   { link: "/", label: "Home" },
   { link: "/logout", label: "Logout" },
 ];
+
 function DashboardWrapper() {
   const theme = useTheme();
   const matches = useMediaQuery("(min-width:1024px)");
   const [open, setOpen] = React.useState(true);
+  const [loading, setLoading] = React.useState(true);
+  const [userData, setUserData] = React.useState(true);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { user, logoutUser } = useAuthentication();
   const navigate = useNavigate();
@@ -103,6 +158,21 @@ function DashboardWrapper() {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
+
+  const axios = useAxiosSecure();
+
+  React.useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`/user/${user?.email}`)
+      .then((res) => {
+        setUserData(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+      });
+  }, []);
 
   const handleCloseUserMenu = (data) => {
     if (data === "/logout") {
@@ -196,29 +266,31 @@ function DashboardWrapper() {
         </DrawerHeader>
         <Divider />
         <List>
-          {navLink.map((item, index) => (
-            <Link to={item.link} key={index}>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.label} />
-                </ListItemButton>
-              </ListItem>
-            </Link>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          {loading && (
+            <>
+              <Skeleton sx={{ mt: 2 }} variant="rectangular" height={35} />
+              <Skeleton sx={{ mt: 2 }} variant="rectangular" height={35} />
+              <Skeleton sx={{ mt: 2 }} variant="rectangular" height={35} />
+              <Skeleton sx={{ mt: 2 }} variant="rectangular" height={35} />
+              <Skeleton sx={{ mt: 2 }} variant="rectangular" height={35} />
+              <Skeleton sx={{ mt: 2 }} variant="rectangular" height={35} />
+            </>
+          )}
+          {!loading &&
+            navLink.map((item, index) => {
+              return (
+                item.role == userData.role && (
+                  <Link to={item.link} key={index}>
+                    <ListItem disablePadding>
+                      <ListItemButton>
+                        <ListItemIcon>{item.icon}</ListItemIcon>
+                        <ListItemText primary={item.label} />
+                      </ListItemButton>
+                    </ListItem>
+                  </Link>
+                )
+              );
+            })}
         </List>
       </Drawer>
       <Main open={matches ? open : matches}>
