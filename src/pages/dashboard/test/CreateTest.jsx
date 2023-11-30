@@ -6,6 +6,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { DatePicker } from "@mui/x-date-pickers";
+import DashboardContainer from "../../../components/common/DashboardContainer";
 
 const initialState = {
   img: "",
@@ -90,9 +91,8 @@ const CreateTest = () => {
     }
   }, [error]);
   return (
-    <div>
-      <h1 className=" text-2xl font-bold mt-8">ADD TEST</h1>
-      <div className="w-full">
+    <>
+      <DashboardContainer label="ADD TEST">
         <form
           onSubmit={handleSubmit}
           className="w-full flex flex-col gap-8 mt-5">
@@ -184,8 +184,8 @@ const CreateTest = () => {
             Create Test
           </Button>
         </form>
-      </div>
-    </div>
+      </DashboardContainer>
+    </>
   );
 };
 
