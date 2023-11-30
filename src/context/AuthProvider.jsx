@@ -43,13 +43,17 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
       const loggedUser = { email: user?.email };
       if (user?.email) {
-        axios.post(`${import.meta.env.VITE_SERVER_URL}/jwt`, loggedUser, {
-          withCredentials: true,
-        });
+        axios
+          .post(`${import.meta.env.VITE_SERVER_URL}/jwt`, loggedUser)
+          .then((res) => {
+            if (res.data) {
+              localStorage.setItem("access-token", res.data);
+              setLoading(false);
+            }
+          });
       } else {
-        axios.post(`${import.meta.env.VITE_SERVER_URL}/logout`, loggedUser, {
-          withCredentials: true,
-        });
+        localStorage.removeItem("access-token");
+        setLoading(false);
       }
     });
     return () => {
