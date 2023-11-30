@@ -3,7 +3,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useTestById from "../../../hooks/useTestById";
 import ApplyCoupon from "./ApplyCoupon";
 import useAuthentication from "../../../hooks/useAuthentication";
@@ -17,6 +17,7 @@ const CheckOutForm = () => {
   const { id } = useParams();
   const { data, loading } = useTestById(id);
   const { user } = useAuthentication();
+  const navigate = useNavigate();
 
   const applyCouponCode = (value) => {
     setCoupon(value);
@@ -104,6 +105,7 @@ const CheckOutForm = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          navigate("/dashboard/my-appointments");
         })
         .catch((err) => console.log(err));
     }

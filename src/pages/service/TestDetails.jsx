@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useTestById from "../../hooks/useTestById";
 import PageHeader from "../../components/common/PageHeader";
 import {
@@ -18,14 +18,29 @@ import useAllTest from "../../hooks/useAllTest";
 import TestCard from "./TestCard";
 import TestCardSkeleton from "../../components/skeleton/TestCardSkeleton";
 import dayjs from "dayjs";
-import timeFormat from "../../utils/timeFormat";
+import Swal from "sweetalert2";
 
 const TestDetails = () => {
   const { id } = useParams();
   const { data, loading } = useTestById(id);
   const { data: allTest, loading: allTestLoading } = useAllTest();
+  const navigate = useNavigate();
+  const handleBooking = () => {
+    Swal.fire({
+      title: data?.title,
+      text: `Price : ${data?.price}`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Payment",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate(`/dashboard/payment/${id}`);
+      }
+    });
+  };
 
-  console.log(data?.timeSlot);
   return (
     <div>
       <PageHeader>Test Details</PageHeader>
@@ -43,26 +58,18 @@ const TestDetails = () => {
       <Box mt={5}>
         <Container>
           {!loading && (
-            <div className="flex flex-col md:flex-row justify-between items-start gap-3">
+            <div className="flex flex-col md:flex-row justify-between items-start gap-3 mb-7">
               <div className="w-full">
                 <img src={data?.img} alt="" className=" w-full h-[500px]" />
 
-                <h1 className=" mt-5 text-2xl font-bold">Available Day</h1>
-                <div className=" flex justify-start items-start gap-2 flex-wrap">
-                  {data?.availableDate.map((item, index) => (
-                    <Chip
-                      key={index}
-                      color="primary"
-                      label={item}
-                      variant="outlined"
-                    />
-                  ))}
-                </div>
-                <h1 className=" mt-5 text-2xl font-bold">Time Slot</h1>
-                <h1>
-                  {data?.timeSlot && timeFormat(data?.timeSlot[0])} To{" "}
-                  {data?.timeSlot && timeFormat(data?.timeSlot[1])}
-                </h1>
+                <h1 className=" mt-5 text-2xl font-bold">Available Date</h1>
+                <Chip
+                  color="primary"
+                  label={dayjs(data?.availableDate).format("DD-MM-YYYY")}
+                  variant="outlined"
+                />
+                <h1 className=" mt-5 text-2xl font-bold">Available slots</h1>
+                <Chip color="primary" label={data?.slots} variant="outlined" />
               </div>
               <div className="w-full">
                 <h1 className="text-4xl font-bold">{data?.title}</h1>
@@ -93,9 +100,14 @@ const TestDetails = () => {
                   <Button size="large" variant="outlined" disableTouchRipple>
                     <span className=" font-bold ">Price : {data?.price} ৳</span>
                   </Button>
-                  <Button size="large" variant="contained">
-                    <span className=" font-bold ">Book This Test</span>
-                  </Button>
+                  {data?.slots > 0 && (
+                    <Button
+                      onClick={handleBooking}
+                      size="large"
+                      variant="contained">
+                      <span className=" font-bold ">Book This Test</span>
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>

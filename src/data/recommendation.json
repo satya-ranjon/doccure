@@ -1,7 +1,20 @@
 [
   {
+    "img": "https://i.ibb.co/RCFKGyx/feature-11.jpg",
+    "price": "12540",
+    "slots": "20",
+    "title": "Special Diabetic Checkup",
+    "description": "The modern lifestyle makes us all susceptible to diabetes. It is, therefore, recommended to know the symptoms and take preventive measures. The Special Diabetic Checkup provides you with the most comprehensive & specialized assessment of your diabetic health.",
+    "availableDate": "2023-12-04T18:00:00.000Z",
+    "includedTests": [
+      "USG Whole Abdomen MCC with PVR",
+      "S. Lipid Profile (Fasting)"
+    ]
+  },
+  {
     "img": "https://i.ibb.co/h8rwq8M/feature-07.jpg",
-    "availableDate": [1, 2, 3, 4, 6, 0],
+    "availableDate": "2023-12-04T18:00:00.000Z",
+    "slots": "20",
     "price": "8000",
     "title": "Special Diabetic Checkup",
     "includedTests": [
@@ -23,7 +36,8 @@
   },
   {
     "img": "https://i.ibb.co/r4f2hdf/feature-08.jpg",
-    "availableDate": [1, 2, 4, 0],
+    "availableDate": "2023-12-04T18:00:00.000Z",
+    "slots": "20",
     "price": "11000",
     "title": "Special Diabetic Checkup",
     "includedTests": [
@@ -37,11 +51,13 @@
       "Urine R/M/E",
       "ECG"
     ],
+
     "description": "The modern lifestyle makes us all susceptible to diabetes. It is therefore, recommended to know the symptoms and take preventive measures. The General Diabetic Checkup provides you the most advanced & accurate assessment of your diabetic health."
   },
   {
     "img": "https://i.ibb.co/kJpgPqS/feature-09-1.jpg",
-    "availableDate": [2, 3, 4, 6, 0],
+    "availableDate": "2023-12-04T18:00:00.000Z",
+    "slots": "20",
     "price": "15000",
     "title": "Major Health Checkup (Male)",
     "includedTests": [
@@ -68,11 +84,13 @@
       "S.TSH",
       "CRP"
     ],
+
     "description": "A major health checkup should be done at least once in 6-12 months, so as to ensure that you are keeping yourself immune to and avoiding any forthcoming medical issues. The Major Health Checkup (Male) Package consists of fundamental tests for screening male health."
   },
   {
     "img": "https://i.ibb.co/dJZgnqj/feature-10.jpg",
-    "availableDate": [1, 2, 3, 4, 6, 0],
+    "availableDate": "2023-12-04T18:00:00.000Z",
+    "slots": "20",
     "price": "12000",
     "title": "General Renal Health Checkup",
     "includedTests": [
@@ -100,11 +118,13 @@
       "S.TSH",
       "CRP"
     ],
+
     "description": "The General Renal Health Checkup should be done at least once a year so that if you have early kidney disease, it can be treated right away. Early kidney disease can and should be treated to keep it from getting worse!"
   },
   {
     "img": "https://i.ibb.co/RCFKGyx/feature-11.jpg",
-    "availableDate": [1, 2, 3],
+    "availableDate": "2023-12-04T18:00:00.000Z",
+    "slots": "20",
     "price": "7100",
     "title": "Special Health Checkup",
     "includedTests": [
@@ -127,11 +147,13 @@
       "S.TSH",
       "CRP"
     ],
+
     "description": "The Special Health Checkup Package includes tests necessary for a conclusive assessment of an individual. This plan is designed to provide a thorough screening of one’s health status."
   },
   {
     "img": "https://i.ibb.co/V2V5JZB/feature-12.jpg",
-    "availableDate": [1, 2, 6, 0],
+    "availableDate": "2023-12-04T18:00:00.000Z",
+    "slots": "20",
     "price": "9800",
     "title": "Routine Checkup with FBS",
     "includedTests": [
@@ -147,11 +169,13 @@
       "X-Ray Chest P/A View (100% Digital)",
       "CRP"
     ],
+
     "description": "Routine Checkup with FBS (Fasting blood sugar (FBS) measures blood glucose after you have not eaten for at least 8 hours) reduce your risk of getting sick. Detect potentially life-threatening health conditions or diseases early. Increase chances for treatment and cure. Limit risk of complications by closely monitoring existing conditions."
   },
   {
     "img": "https://i.ibb.co/nbBxB3b/PDCL-Package-Images-2.jpg",
-    "availableDate": [1, 2, 3, 4, 6, 0],
+    "availableDate": "2023-12-04T18:00:00.000Z",
+    "slots": "20",
     "price": "5800",
     "title": "Liver Checkup (Chronic Liver Diseases)",
     "includedTests": [
@@ -177,11 +201,13 @@
       " Endoscopy with Upper G.I.T",
       "S. Bilirubin"
     ],
+
     "description": "Unfortunately, Liver damage does not cause any explicit symptoms unless it progresses to a significant level; and the eating habits of modern day (junk food, high fat diet, carbonated beverages, alcohol etc.) are good ways to induce Liver problems. If the damage goes below a certain level, it may not be treatable and Liver transplant becomes the only option for survival."
   },
   {
     "img": "https://i.ibb.co/yByWzQM/Primary-Health-Checkup.jpg",
-    "availableDate": [1, 2, 3, 4, 0],
+    "availableDate": "2023-12-04T18:00:00.000Z",
+    "slots": "20",
     "price": "14800",
     "title": "Primary Health Checkup",
     "includedTests": [
@@ -198,11 +224,13 @@
       "ECG",
       "USG Whole Abdomen MCC with PVR"
     ],
+
     "description": "The Primary Health Checkup Package includes tests necessary for an essential assessment of an individual. This plan is designed to provide an initial screening of one’s health status."
   },
   {
     "img": "https://i.ibb.co/wzt5Dnj/Routine-Checkup-with-FBS-RBS.jpg",
-    "availableDate": [1, 2, 6, 0],
+    "availableDate": "2023-12-04T18:00:00.000Z",
+    "slots": "20",
     "price": "21000",
     "title": "Routine Checkup with RBS",
     "includedTests": [
@@ -217,11 +245,13 @@
       "X-Ray Chest P/A View (100% Digital)",
       "Urine R/M/E"
     ],
+
     "description": "Routine Checkup with RBS (Random blood sugar (RBS) measures blood glucose regardless of when you last ate) reduce your risk of getting sick. Detect potentially life-threatening health conditions or diseases early. Increase chances for treatment and cure. Limit risk of complications by closely monitoring existing conditions."
   },
   {
     "img": "https://i.ibb.co/T288hY8/PDCL-Package-Images-3.jpg",
-    "availableDate": [1, 2, 3, 4],
+    "availableDate": "2023-12-04T18:00:00.000Z",
+    "slots": "20",
     "price": "8500",
     "title": "General Liver Checkup",
     "includedTests": [
@@ -239,11 +269,13 @@
       "Alkaline Phos.",
       "S.TSH"
     ],
+
     "description": "The Liver is the largest internal organ in the body and plays a crucial role in the digestive system. So, it is imperative that if the liver stops working it will affect all the other organs of the body in a serious way. General Liver Checkup is the periodic clinical screening of the Liver to ensure its optimum working condition and make suitable changes to habits and lifestyle."
   },
   {
     "img": "https://i.ibb.co/KFQv686/PDCL-Package-Images-1.jpg",
-    "availableDate": [3, 4, 6, 0],
+    "availableDate": "2023-12-04T18:00:00.000Z",
+    "slots": "20",
     "price": "13540",
     "title": "Special Liver Checkup",
     "includedTests": [
@@ -267,6 +299,7 @@
       "Anti HBc Total",
       "CRP"
     ],
+
     "description": "The liver's main function is to filter the blood from the digestive system for toxic material and to metabolize drugs and chemicals. It also releases a digestive juice called Bile that is necessary to break down fat. People with risk factors need to periodically check their Liver health to ward off future complications."
   }
 ]

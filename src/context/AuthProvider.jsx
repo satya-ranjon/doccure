@@ -8,6 +8,7 @@ import {
 } from "firebase/auth";
 
 import auth from "../firebase/firebaseConfig";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -40,6 +41,16 @@ const AuthProvider = ({ children }) => {
       setUserId(user?.uid);
       setUser(user?.providerData[0]);
       setLoading(false);
+      const loggedUser = { email: user?.email };
+      if (user?.email) {
+        axios.post(`${import.meta.env.VITE_SERVER_URL}/jwt`, loggedUser, {
+          withCredentials: true,
+        });
+      } else {
+        axios.post(`${import.meta.env.VITE_SERVER_URL}/logout`, loggedUser, {
+          withCredentials: true,
+        });
+      }
     });
     return () => {
       unSubscribe();

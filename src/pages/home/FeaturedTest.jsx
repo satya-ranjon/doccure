@@ -1,4 +1,4 @@
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import SectionTitle from "../../components/common/SectionTitle";
 import { images } from "../../constant";
 

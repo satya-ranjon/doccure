@@ -58,7 +58,6 @@ const Recommendation = () => {
         setLoading(false);
       });
   }, []);
-  console.log(data);
 
   return (
     <div className=" py-28">

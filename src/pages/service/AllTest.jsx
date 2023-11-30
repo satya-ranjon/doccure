@@ -10,6 +10,7 @@ import useAllTest from "../../hooks/useAllTest";
 import TestCardSkeleton from "../../components/skeleton/TestCardSkeleton";
 import TestCard from "./TestCard";
 import dayjs from "dayjs";
+import DataNotFound from "../../components/common/DataNotFound";
 
 const AllTest = () => {
   const [filterDate, setFilterDate] = useState(null);
@@ -61,11 +62,7 @@ const AllTest = () => {
           )}
 
           {!loading && showData.length === 0 && (
-            <>
-              <div className="text-center text-xl md:text-5xl font-bold">
-                Test Not Found
-              </div>
-            </>
+            <DataNotFound> Test Not Found</DataNotFound>
           )}
 
           {!loading && (

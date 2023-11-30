@@ -76,12 +76,15 @@ export default function Register() {
           }
         );
         if (res.data.success) {
+          const imageUrl = res.data.data.display_url;
           registration(values.email, values.password)
             .then((result) => {
-              updateUserProfile(values.name, res.data.data.display_url)
+              updateUserProfile(values.name, imageUrl)
                 .then((res) => {
                   axiosPublic
                     .post("/user", {
+                      name: values.name,
+                      avatar: imageUrl,
                       email: values.email,
                       bloodGroup: values.bloodGroup,
                       district: values.district,

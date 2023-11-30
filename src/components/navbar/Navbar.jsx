@@ -15,20 +15,19 @@ import {
   Typography,
 } from "@mui/material";
 import Logo from "../common/Logo";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Person2Icon from "@mui/icons-material/Person2";
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import logo from "../../assets/logo (1).png";
 import useAuthentication from "../../hooks/useAuthentication";
+
 const pages = [
   { link: "/", label: "Home" },
   { link: "/all-test", label: "Tests" },
-  { link: "/blog", label: "Blog" },
-  { link: "/contact", label: "Contact" },
 ];
 const settings = [
-  { link: "/", label: "Dashboard" },
+  { link: "/dashboard/profile", label: "Dashboard" },
   { link: "/logout", label: "Logout" },
 ];
 
@@ -36,6 +35,8 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [mobileMenu, setMobileMenu] = useState(false);
   const { user, logoutUser } = useAuthentication();
+  const navigate = useNavigate();
+
   const toggleDrawer = () => {
     setMobileMenu(!mobileMenu);
   };
@@ -47,7 +48,9 @@ const Navbar = () => {
   const handleCloseUserMenu = (data) => {
     if (data === "/logout") {
       logoutUser();
+      return;
     }
+    navigate(data);
     setAnchorElUser(null);
   };
 
